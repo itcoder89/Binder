@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivlighting"
+            android:layout_width="24dp"
+            android:layout_centerVertical="true"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_roatating"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dimgray"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:layout_toRightOf="@+id/ivlighting"
+        android:gravity="center_horizontal"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/i_meant_to_swipte_right"/>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:textColor="@color/darkgray"
+        android:gravity="center_horizontal"
+        android:textSize="18dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/boost_your_profile_once_a_month"/>
+</LinearLayout>

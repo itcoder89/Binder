@@ -1,0 +1,32 @@
+AndroidMenifest.xml
+
+Now we are fetching the user image from our server instead of firebase.
+
+so where ever in the app a user images is show you have to go to their respected java call and change the link their.
+
+we are also telling you which files has been changed.
+doubledate >> Accounts >> Get_User_Info_A.java
+doubledate >> Accounts >> Login_A.java
+
+doubledate >> Inbox >> Inbox_Adapter.java
+doubledate >> Inbox >> Inbox_F.java
+doubledate >> Inbox >> Matches_Adapter.java
+
+
+doubledate >> Match >> Match_F.java
+
+doubledate >> Profile >> EditProfile >> EditProfile_F.java
+doubledate >> Profile >> EditProfile >> Profile_photos_Adapter.java
+doubledate >> Profile >> Profile_F.java
+
+
+doubledate >> Users >> Images_sliding_adapter.java
+doubledate >> Users >> User_Adapter.java
+
+doubledate >> UsersLikes >> User_Like_Adapter.java
+doubledate >> Inbox >> Matches_Adapter.java
+
+doubledate >> Video_Calling >> VideoActivity.java
+
+doubledate >>  See_Full_Image_F.java
+

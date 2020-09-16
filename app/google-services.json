@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "127596666586",
+    "firebase_url": "https://doubledate-30378.firebaseio.com",
+    "project_id": "doubledate-30378",
+    "storage_bucket": "doubledate-30378.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127596666586:android:38f26db8a4578a6c2a4fe3",
+        "android_client_info": {
+          "package_name": "com.brosis.doubledate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127596666586-ltcmcvf18du0p98p3ji0ih1omfu7b3ft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brosis.doubledate",
+            "certificate_hash": "e609490818ef23bff46ccacf9e8676a89922a840"
+          }
+        },
+        {
+          "client_id": "127596666586-vc699upbboq23lohdobotkv7svspn7le.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwLMmacc3dQtzb1CxLN1ABXjKT_7RSbV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127596666586-vc699upbboq23lohdobotkv7svspn7le.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "127596666586-l1i1v579ph4mt3psnasd995ge9fqk8tj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.brosis.DoubleDate"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
