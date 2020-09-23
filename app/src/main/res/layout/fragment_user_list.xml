@@ -77,7 +77,7 @@
                         <ImageButton
                             android:layout_width="38dp"
                             android:layout_height="38dp"
-                            android:src="@drawable/ic_cross"
+                            android:src="@drawable/close_active"
                             android:id="@+id/back_btn"
                             android:scaleType="fitCenter"
                             android:background="@color/transparent"

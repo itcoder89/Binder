@@ -66,11 +66,11 @@ public class NewTabHome extends AppCompatActivity implements BillingProcessor.IB
     public static String title = "none";
     public static String Receiver_pic = "none";
 
-    private int[] tabIcons = {
-            R.drawable.ic_profile_gray,
-            R.drawable.ic_binder_color,
-            R.drawable.ic_start_icon,
-            R.drawable.ic_message_gray
+    private int[] tabIcons = {//ic_binder_color
+            R.drawable.ic_user_inactive,
+            R.drawable.ic_logo_active,
+            R.drawable.ic_star_inactive,
+            R.drawable.ic_msg_inactive
     };
 
     @Override
@@ -153,52 +153,28 @@ public class NewTabHome extends AppCompatActivity implements BillingProcessor.IB
                 //tab.getIcon().setColorFilter(tabIconColor, PorterDuff.Mode.SRC_IN);
                 switch (tab.getPosition()) {
                     case 0:
-                        tab.setIcon(R.drawable.ic_profile_color);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_binder_gray);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_start_icon);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_message_gray);
-                        /*if(LocalStorage.getIsFragmentOpen(NewTabHome.this).equals("true")){
-                            LocalStorage.setIsFragmentOpen(NewTabHome.this,"false");
-                            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                            }
-                        }*/
+                        tab.setIcon(R.drawable.ic_user_active);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_logo_inactive);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star_inactive);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_msg_inactive);
                         break;
                     case 1:
-                        tab.setIcon(R.drawable.ic_binder_color);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_start_icon);
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_profile_gray);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_message_gray);
-                        /*if(LocalStorage.getIsFragmentOpen(NewTabHome.this).equals("true")){
-                            LocalStorage.setIsFragmentOpen(NewTabHome.this,"false");
-                            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                            }
-                        }*/
+                        tab.setIcon(R.drawable.ic_logo_active);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star_inactive);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_user_inactive);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_msg_inactive);
                         break;
                     case 2:
-                        tab.setIcon(R.drawable.ic_star);
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_profile_gray);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_binder_gray);
-                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_message_gray);
-                        /*if(LocalStorage.getIsFragmentOpen(NewTabHome.this).equals("true")){
-                            LocalStorage.setIsFragmentOpen(NewTabHome.this,"false");
-                            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                            }
-                        }*/
+                        tab.setIcon(R.drawable.ic_star_active);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_user_inactive);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_logo_inactive);
+                        tabLayout.getTabAt(3).setIcon(R.drawable.ic_msg_inactive);
                         break;
                     case 3:
-                        tab.setIcon(R.drawable.ic_message_color);
-                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_profile_gray);
-                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_binder_gray);
-                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_start_icon);
-                        /*if(LocalStorage.getIsFragmentOpen(NewTabHome.this).equals("true")){
-                            LocalStorage.setIsFragmentOpen(NewTabHome.this,"false");
-                            for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-                                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
-                            }
-                        }*/
+                        tab.setIcon(R.drawable.ic_msg_active);
+                        tabLayout.getTabAt(0).setIcon(R.drawable.ic_user_inactive);
+                        tabLayout.getTabAt(1).setIcon(R.drawable.ic_logo_inactive);
+                        tabLayout.getTabAt(2).setIcon(R.drawable.ic_star_inactive);
                         break;
 
 
@@ -303,8 +279,8 @@ public class NewTabHome extends AppCompatActivity implements BillingProcessor.IB
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        ApiRequest.Call_Api(this, Variables.update_purchase_Status, parameters, null);
+        //before
+        //ApiRequest.Call_Api(this, Variables.update_purchase_Status, parameters, null);
 
 
     }

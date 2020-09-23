@@ -458,7 +458,7 @@ public class Login_A extends AppCompatActivity {
         try {
             parameters.put("fb_id", user_id);
             parameters.put("first_name",nameparts[0]);
-            if(nameparts[0] != null){
+            if(nameparts.length > 1){
                 parameters.put("last_name", nameparts[1]);
             }else{
                 parameters.put("last_name", l_name);

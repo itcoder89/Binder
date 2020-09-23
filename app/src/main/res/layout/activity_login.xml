@@ -8,186 +8,198 @@
     android:background="@color/white"
     tools:context="com.brosis.doubledate.Accounts.Login_A">
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:fillViewport="true">
-
-    <androidx.percentlayout.widget.PercentRelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="15dp">
+        android:fillViewport="true">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_heightPercent="62%"
-            android:id="@+id/upperlayout"
-            android:layout_weight="1">
-
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/pager"
-                android:background="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="always"
-                android:layout_above="@+id/indicator"
-                />
-
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/indicator"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                app:tabBackground="@drawable/d_indicator_background"
-                app:tabGravity="center"
-                app:tabIndicatorHeight="0dp"
-                android:layout_alignParentBottom="true"
-                />
-
-        </RelativeLayout>
-
-        <LinearLayout
+        <androidx.percentlayout.widget.PercentRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_below="@+id/upperlayout"
-            android:orientation="vertical">
-
-
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:layout_marginTop="15dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:visibility="gone"
-                android:background="@drawable/ic_fb_btn_background">
+                android:layout_height="0dp"
+                app:layout_heightPercent="62%"
+                android:id="@+id/upperlayout"
+                android:layout_weight="1">
 
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_facebook"
-                    android:layout_marginStart="10dp"
-                    android:layout_centerVertical="true"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:textColor="@color/white"
-                android:textAllCaps="true"
-                android:textSize="14dp"
-                android:text="@string/continue_with_facebook"
-                style="?android:attr/borderlessButtonStyle"
-                android:onClick="Login"
-                />
-            </RelativeLayout>
-            <!--Facebook login layout-->
-            <FrameLayout
-                android:id="@+id/FrameLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="50dp">
-
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/login_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone" />
-
-                <ImageView
-                    android:id="@+id/fb"
-                    android:layout_height="wrap_content"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/pager"
+                    android:background="@color/white"
                     android:layout_width="match_parent"
-                    android:onClick="fbsignin"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_fb_btn_background" />
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/ic_facebook"
-                    android:layout_centerVertical="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textColor="@color/white"
-                    android:textAllCaps="true"
-                    android:textSize="14dp"
-                    android:text="@string/continue_with_facebook"/>
-            </FrameLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/gmail_login_layout"
-                android:background="@drawable/ic_google_background">
-
-                <ImageView
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/ic_gmail"
-                    android:layout_marginStart="10dp"
-                    android:layout_centerVertical="true"/>
+                    android:layout_height="match_parent"
+                    android:overScrollMode="always"
+                    android:layout_above="@+id/indicator" />
 
 
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/black"
-                    android:clickable="false"
-                    android:textAllCaps="true"
-                    android:textSize="14dp"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:background="@color/transparent"
-                    android:text="@string/continue_with_google"/>
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    app:tabBackground="@drawable/d_indicator_background"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    android:layout_alignParentBottom="true" />
 
             </RelativeLayout>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:id="@+id/phone_login_layout">
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/black"
-                    android:clickable="false"
-                    android:textSize="13dp"
-                    android:background="@color/transparent"
-                    style="?android:attr/borderlessButtonStyle"
-                    android:text="@string/continue_with_phone"/>
-
-            </RelativeLayout>
-
-
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="@color/dimgray"
-                android:text="@string/we_don_t_post_anything_to_facebook"
-                android:layout_marginTop="10dp"
-                android:lineSpacingExtra="7dp"/>
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_below="@+id/upperlayout"
+                android:orientation="vertical">
 
-        </LinearLayout>
 
-    </androidx.percentlayout.widget.PercentRelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:background="@drawable/ic_fb_btn_background">
 
-</ScrollView>
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_facebook"
+                        android:layout_marginStart="10dp"
+                        android:layout_centerVertical="true" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:textColor="@color/white"
+                        android:textAllCaps="true"
+                        android:textSize="14dp"
+                        android:text="@string/continue_with_facebook"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:onClick="Login" />
+                </RelativeLayout>
+                <!--Facebook login layout-->
+                <FrameLayout
+                    android:id="@+id/FrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/fb"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:onClick="fbsignin"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_fb_btn_background" />
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/ic_facebook"
+                        android:layout_centerVertical="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"
+                        android:textAllCaps="true"
+                        android:textSize="14dp"
+                        android:text="@string/continue_with_facebook" />
+                </FrameLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/gmail_login_layout"
+                    android:background="@drawable/ic_google_background">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_gmail"
+                        android:layout_marginStart="10dp"
+                        android:layout_centerVertical="true" />
+
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/black"
+                        android:clickable="false"
+                        android:textAllCaps="true"
+                        android:textSize="14dp"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:background="@color/transparent"
+                        android:text="@string/continue_with_google" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/phone_login_layout">
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/black"
+                        android:clickable="false"
+                        android:textSize="13dp"
+                        android:background="@color/transparent"
+                        style="?android:attr/borderlessButtonStyle"
+                        android:text="@string/continue_with_phone" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color"
+                        android:text="With" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp"
+                        android:src="@drawable/ic_like"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_color"
+                        android:text="Double Date" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.percentlayout.widget.PercentRelativeLayout>
+
+    </ScrollView>
 
 
 </FrameLayout>

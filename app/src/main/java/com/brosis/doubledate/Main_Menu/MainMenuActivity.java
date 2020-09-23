@@ -294,7 +294,7 @@ public class MainMenuActivity extends AppCompatActivity implements BillingProces
             e.printStackTrace();
         }
 
-        ApiRequest.Call_Api(this, Variables.update_purchase_Status, parameters, null);
+        //ApiRequest.Call_Api(this, Variables.update_purchase_Status, parameters, null);
 
 
     }

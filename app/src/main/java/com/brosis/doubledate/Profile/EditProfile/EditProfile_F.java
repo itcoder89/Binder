@@ -1,19 +1,28 @@
 package com.brosis.doubledate.Profile.EditProfile;
 
 
+import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +41,8 @@ import com.brosis.doubledate.Profile.Profile_F;
 import com.brosis.doubledate.R;
 import com.brosis.doubledate.Users.Nearby_User_Get_Set;
 import com.brosis.doubledate.newtab.NewTabHome;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.wonshinhyo.dragrecyclerview.DragRecyclerView;
 import com.wonshinhyo.dragrecyclerview.SimpleDragListener;
@@ -41,6 +52,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,6 +67,8 @@ import static com.brosis.doubledate.CodeClasses.Variables.Select_image_from_gall
  */
 public class EditProfile_F extends AppCompatActivity {
 
+    private static final int MY_CAMERA_REQUEST_CODE = 100;
+    private File imgUrl;
     //View view;
     Context context;
 
@@ -121,7 +135,8 @@ public class EditProfile_F extends AppCompatActivity {
             public void onItemClick(String item,int postion, View view) {
                 if(view.getId()==R.id.cross_btn ){
                     if(item.equals("")){
-                        selectImage();
+                        //selectImage();
+                        selectImageNew();
                     }else {
                         Call_Api_For_deletelink(item);
                         profile_photos_adapter.notifyDataSetChanged();
@@ -201,6 +216,43 @@ public class EditProfile_F extends AppCompatActivity {
         });
 
         Get_User_info();
+
+    }
+
+    /*Upload Event Image */
+
+    private void selectImageNew() {
+        if (ContextCompat.checkSelfPermission(EditProfile_F.this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(new String[]{Manifest.permission.CAMERA},
+                        MY_CAMERA_REQUEST_CODE);
+            }
+        }
+        final CharSequence[] options = {"Take Photo", "Choose from Gallery", "Cancel"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditProfile_F.this);
+        builder.setTitle("Add Photo!");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int item) {
+                try {
+                    if (options[item].equals("Take Photo")) {
+                        //  EasyImage.openCamera(getActivity(), 100);
+                        EasyImage.openCamera(EditProfile_F.this, 100);
+                        //EasyImage.openCamera(getFragmentManager().findFragmentById(R.id.containerView), 100);
+                    } else if (options[item].equals("Choose from Gallery")) {
+                        EasyImage.openGallery(EditProfile_F.this, 200);
+                        //  EasyImage.openGallery(getFragmentManager().findFragmentById(R.id.containerView), 200);
+                    } else if (options[item].equals("Cancel")) {
+                        dialog.dismiss();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        builder.show();
 
     }
 
@@ -343,7 +395,8 @@ public class EditProfile_F extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-         if (resultCode == RESULT_OK) {
+
+        /*if (resultCode == RESULT_OK) {
 
             if (requestCode == Select_image_from_gallry_code) {
 
@@ -356,18 +409,64 @@ public class EditProfile_F extends AppCompatActivity {
                 handleCrop(result.getUri());
             }
 
+        }*/
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            handleCrop(result.getUri());
         }
+        EasyImage.handleActivityResult(requestCode, resultCode, data, EditProfile_F.this, new DefaultCallback() {
+            @Override
+            public void onImagePickerError(Exception e, EasyImage.ImageSource source, int type) {
+                //Some error handling
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
+                if (type == 100) {
+                    imgUrl = new File(imageFile.getAbsolutePath());
+                    Log.e("imgUrl", "100:" + imgUrl);
+                    /*Glide.with(EditPErofile.this)
+                            .load(imageFile.getAbsolutePath())
+                            .apply(new RequestOptions())
+                            .into(ivProfileImg);*/
+                    Uri selectedImage = Uri.fromFile(imgUrl);
+                    Log.e("selectedImage", "Uri:" + Uri.fromFile(imgUrl).toString());
+                    beginCrop(selectedImage);
+                    //beginCrop(imageFile.getAbsolutePath());
+                } else {
+                    imgUrl = new File(imageFile.getAbsolutePath());
+                    Log.e("imgUrl", "200:" + imgUrl);
+                    /*Glide.with(EditProfile.this)
+                            .load(imageFile.getAbsolutePath())
+                            .apply(new RequestOptions())
+                            .into(ivProfileImg);*/
+                    Uri selectedImage = Uri.fromFile(imgUrl);
+                    Log.e("selectedImage", "Uri:" + Uri.fromFile(imgUrl).toString());
+                    beginCrop(selectedImage);
+                }
+            }
+
+            @Override
+            public void onCanceled(EasyImage.ImageSource source, int type) {
+                //Cancel handling, you might wanna remove taken photo if it was canceled
+                if (source == EasyImage.ImageSource.CAMERA) {
+                    File photoFile = EasyImage.lastlyTakenButCanceledPhoto(EditProfile_F.this);
+                    if (photoFile != null) photoFile.delete();
+                }
+            }
+        });
+
+
     }
 
 
 
     // botoom there function are related to crop the image
     private void beginCrop(Uri source) {
-
         CropImage.activity(source)
                 .start(EditProfile_F.this);
-
-
     }
 
     private void handleCrop( Uri userimageuri) {

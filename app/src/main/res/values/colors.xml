@@ -28,5 +28,6 @@
     <!-- dots active colors -->
     <color name="dot_light_screen1">#bbbbbb</color>
     <color name="colorTransparentBlack">#33000000</color>
+    <color name="text_color">#FFAB00</color>
 
 </resources>

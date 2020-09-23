@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/ivUploadImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_10dp"
+        android:src="@drawable/upload_image"/>
+
+    <Button
+        android:id="@+id/tvTakePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Take Photo"/>
+
+    <TextView
+        android:id="@+id/tvImagePath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Take Photo"/>
+
+    <TextView
+        android:id="@+id/tvImageBitmapPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Bitmap path"/>
+</LinearLayout>

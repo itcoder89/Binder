@@ -64,7 +64,7 @@ tools:context="com.brosis.doubledate.Accounts.Get_User_Info_A">
                     android:scaleType="fitXY"
                     android:id="@+id/edit_profile_image"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_round_edit_color"
+                    android:src="@drawable/ic_edit_active"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     />

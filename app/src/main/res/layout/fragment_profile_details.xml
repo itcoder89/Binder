@@ -261,7 +261,7 @@
             android:layout_marginBottom="15dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:src="@drawable/ic_round_edit_color"/>
+            android:src="@drawable/ic_edit_active"/>
 
     </RelativeLayout>
 

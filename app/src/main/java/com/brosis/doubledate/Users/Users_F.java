@@ -108,17 +108,19 @@ public class Users_F extends RootFragment implements View.OnClickListener {
 
 
         ImageView profile_image=view.findViewById(R.id.profileimage);
-        Picasso.with(context).
-                load(NewTabHome.user_pic)
-                .placeholder(R.drawable.image_placeholder)
-                .into(profile_image);
+        if(!NewTabHome.user_pic.equals(""))
+            Picasso.with(context).
+                    load(NewTabHome.user_pic)
+                    .placeholder(R.drawable.image_placeholder)
+                    .into(profile_image);
 
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(!is_Api_running){
                     is_Api_running=true;
-                    GetPeople_nearby(false);
+                    //before
+                    ///GetPeople_nearby(false);
                 }
             }
         });
@@ -502,7 +504,8 @@ public class Users_F extends RootFragment implements View.OnClickListener {
 
 
 // when ever a user go to the main center view then we call a api of nearby
-    @Override
+    //before
+    /*@Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if((isVisibleToUser && Variables.is_reload_users) && is_view_load){
@@ -512,7 +515,7 @@ public class Users_F extends RootFragment implements View.OnClickListener {
                 GetPeople_nearby(false);
             }
         }
-    }
+    }*/
 
 
    // when all the card is swiped then this mehtod will call and replace the view and show the ad
@@ -543,7 +546,8 @@ public class Users_F extends RootFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        MobileAds.initialize(context, context.getResources().getString(R.string.admob_appid));
+        //before
+        /*MobileAds.initialize(context, context.getResources().getString(R.string.admob_appid));
 
         //code for intertial add
         mInterstitialAd = new InterstitialAd(context);
@@ -556,7 +560,7 @@ public class Users_F extends RootFragment implements View.OnClickListener {
             public void onAdClosed() {
                 mInterstitialAd.loadAd(new AdRequest.Builder().build());
             }
-        });
+        });*/
 
 
     }

@@ -112,7 +112,7 @@
                                     <ImageView
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
-                                        android:src="@drawable/ic_setting" />
+                                        android:src="@drawable/ic_setting_active" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -152,7 +152,7 @@
                                     <ImageView
                                         android:layout_width="50dp"
                                         android:layout_height="50dp"
-                                        android:src="@drawable/ic_edit" />
+                                        android:src="@drawable/ic_edit_active" />
 
                                     <TextView
                                         android:id="@+id/edit_profile_btn"
@@ -201,14 +201,13 @@
 
                                     <FrameLayout
                                         android:layout_width="match_parent"
-                                        android:layout_height="match_parent">
+                                        android:layout_height="wrap_content">
 
-                                        <ImageButton
-                                            android:layout_width="@dimen/_50dp"
-                                            android:layout_height="@dimen/_50dp"
-                                            android:background="@drawable/circle_bg"
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
                                             android:clickable="false"
-                                            android:src="@drawable/ic_camera" />
+                                            android:src="@drawable/custom_media_bg" />
 
                                         <ImageView
                                             android:layout_width="wrap_content"
@@ -257,7 +256,7 @@
             android:background="@color/white"
             android:paddingTop="@dimen/_10dp"
             android:paddingBottom="@dimen/_10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
@@ -332,7 +331,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llcodeview"
-                android:layout_marginTop="@dimen/_15dp"
+                android:layout_marginTop="8sp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:padding="@dimen/_10dp"
@@ -384,7 +383,7 @@
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
                     android:layout_gravity="bottom"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_height="80dp" />
 
 

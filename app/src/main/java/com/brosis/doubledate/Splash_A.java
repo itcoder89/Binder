@@ -51,14 +51,14 @@ public class Splash_A extends AppCompatActivity implements GoogleApiClient.Conne
 
         sharedPreferences=getSharedPreferences(Variables.pref_name,MODE_PRIVATE);
 
-            // here we check the user is already login or not
+        // here we check the user is already login or not
         new Handler().postDelayed(new Runnable() {
                 public void run() {
 
                     if (sharedPreferences.getBoolean(Variables.islogin, false)) {
                         // if user is already login then we get the current location of user
                         if(getIntent().hasExtra("action_type")){//NewTabHome
-                            Intent intent= new Intent(Splash_A.this, NewTabHome.class);//NewTabHome
+                            Intent intent= new Intent(Splash_A.this, NewTabHome.class);//EditProfileNew
                             String action_type=getIntent().getExtras().getString("action_type");
                             String receiverid=getIntent().getExtras().getString("senderid");
                             String title=getIntent().getExtras().getString("title");

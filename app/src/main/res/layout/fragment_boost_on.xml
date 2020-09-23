@@ -49,7 +49,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_width="112dp"
                 android:layout_height="112dp"
-                android:src="@drawable/ic_boost"/>
+                android:src="@drawable/ic_boost_active"/>
 
         </RelativeLayout>
 

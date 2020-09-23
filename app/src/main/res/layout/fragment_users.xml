@@ -81,7 +81,7 @@
                     android:layout_weight="1"
                     android:id="@+id/refresh_btn"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_refresh"/>
+                    android:src="@drawable/refresh_active"/>
 
 
              <ImageButton
@@ -91,7 +91,7 @@
                     android:layout_weight="1"
                     android:id="@+id/cross_btn"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_cross"/>
+                    android:src="@drawable/close_active"/>
 
 
              <ImageButton
@@ -101,7 +101,7 @@
                  android:layout_weight="1"
                  android:id="@+id/supperlike_btn"
                  android:background="@color/transparent"
-                 android:src="@drawable/ic_superlike"/>
+                 android:src="@drawable/ic_star_active"/>
 
 
              <ImageButton
@@ -111,7 +111,7 @@
                     android:layout_weight="1"
                     android:id="@+id/heart_btn"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_heart"/>
+                    android:src="@drawable/ic_heart_active"/>
 
 
              <ImageButton
@@ -121,7 +121,7 @@
                  android:layout_weight="1"
                  android:id="@+id/boost_btn"
                  android:background="@color/transparent"
-                 android:src="@drawable/ic_boost"/>
+                 android:src="@drawable/ic_boost_active"/>
 
          </LinearLayout>
 
@@ -133,8 +133,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:background="@color/white"
+        android:visibility="gone"
         android:id="@+id/find_nearby_User">
 
         <RelativeLayout
@@ -200,7 +200,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_refresh"/>
+                    android:src="@drawable/refresh_active"/>
 
 
                 <ImageButton
@@ -210,7 +210,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_cross"/>
+                    android:src="@drawable/close_active"/>
 
 
 
@@ -221,7 +221,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_heart"/>
+                    android:src="@drawable/ic_heart_active"/>
 
 
 
@@ -232,7 +232,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:background="@color/transparent"
-                    android:src="@drawable/ic_superlike"/>
+                    android:src="@drawable/ic_star_active"/>
 
 
             </LinearLayout>

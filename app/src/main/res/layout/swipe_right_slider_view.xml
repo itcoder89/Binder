@@ -13,7 +13,7 @@
             android:layout_width="24dp"
             android:layout_centerVertical="true"
             android:layout_height="24dp"
-            android:src="@drawable/ic_roatating"/>
+            android:src="@drawable/refresh_active"/>
 
     <TextView
         android:layout_width="wrap_content"
