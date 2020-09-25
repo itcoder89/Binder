@@ -289,7 +289,7 @@
                         android:text="Code"/>
 
                     <EditText
-                        android:id="@+id/tvUniqueCode"
+                        android:id="@+id/edEnterPartnerCode"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textColor="@color/dimgray"
@@ -328,6 +328,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llGenerteCode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/llcodeview"
@@ -341,6 +342,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:clickable="false"
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:text="Generate &amp; share your partner's code"/>

@@ -30,6 +30,7 @@ import com.brosis.doubledate.Main_Menu.RelateToFragment_OnBack.RootFragment;
 import com.brosis.doubledate.R;
 import com.brosis.doubledate.Users.Nearby_User_Get_Set;
 import com.brosis.doubledate.Users.User_detail_F;
+import com.brosis.doubledate.Users.Users_F;
 import com.brosis.doubledate.newtab.NewTabHome;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -126,7 +127,8 @@ public class User_likes_F extends RootFragment implements View.OnClickListener{
             public void onItemClick(int pos, Object item, View view) {
 
                 if(NewTabHome.purduct_purchase) {
-                    open_user_detail((Nearby_User_Get_Set) item);
+                    Log.e("onItemClick", "post"+pos);
+                    open_user_detail((Nearby_User_Get_Set) item,pos);
                 }
 
 
@@ -486,13 +488,30 @@ public class User_likes_F extends RootFragment implements View.OnClickListener{
     }
 
 
-    public void open_user_detail(Nearby_User_Get_Set item){
+    public void open_user_detail(Nearby_User_Get_Set item,int position){
 
         User_detail_F user_detail_f = new User_detail_F();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         Bundle args = new Bundle();
         args.putSerializable("data",item);
         args.putString("from_where","user_list");
+        args.putString("first_name", Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getFirst_name());
+        args.putString("last_name",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getLast_name());
+        args.putString("about_me",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getAbout_me());
+        args.putString("job_title",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getJob_title());
+        args.putString("gender",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getGender());
+        args.putString("birthday",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getBirthday());
+        args.putString("company",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getCompany());
+        args.putString("school",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getSchool());
+        args.putString("age",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getAge()+"");
+        args.putString("partner_code",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getPartner_code());
+        args.putString("personal_code",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getPersonal_code());
+        args.putString("image1",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getImage1());
+        args.putString("image2",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getImage2());
+        args.putString("image3",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getImage3());
+        args.putString("image4",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getImage4());
+        args.putString("image5",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getImage5());
+        args.putString("image6",Users_F.getNearByUserData.getMsg().get(position).getPartner_details().getImage6());
         user_detail_f.setArguments(args);
         transaction.addToBackStack(null);
 

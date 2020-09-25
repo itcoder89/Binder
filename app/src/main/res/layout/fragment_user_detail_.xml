@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="?actionBarSize"
     android:theme="@style/theme_popup"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.brosis.doubledate.Users.User_detail_F">
@@ -311,6 +312,7 @@
                             android:text="Alexa" />
 
                         <TextView
+                            android:id="@+id/tvPartnerAge"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/pink_color"
@@ -348,7 +350,6 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/partner_school_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp">

@@ -13,12 +13,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brosis.doubledate.BuildConfig;
+import com.brosis.doubledate.CodeClasses.ApiRequest;
+import com.brosis.doubledate.CodeClasses.Callback;
+import com.brosis.doubledate.CodeClasses.Functions;
 import com.brosis.doubledate.CodeClasses.Variables;
 import com.brosis.doubledate.Main_Menu.RelateToFragment_OnBack.RootFragment;
 import com.brosis.doubledate.Profile.EditProfile.EditProfile_F;
@@ -27,9 +31,16 @@ import com.brosis.doubledate.Profile.adapter.CustomPagerAdapter;
 import com.brosis.doubledate.R;
 import com.brosis.doubledate.Settings.Setting_F;
 import com.brosis.doubledate.Users.User_detail_F;
+import com.brosis.doubledate.model.AddPartnerData;
 import com.brosis.doubledate.newtab.NewTabHome;
+import com.brosis.doubledate.storage.LocalStorage;
+import com.google.gson.Gson;
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator;
 import com.tbuonomo.viewpagerdotsindicator.SpringDotsIndicator;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,9 +56,12 @@ public class Profile_F extends RootFragment {
 
 
     LinearLayout setting_layout,edit_profile_layout,lladdmedia;
-    TextView tvCopyCode,tvUniqueCode;
+    TextView tvCopyCode;
     ImageView ivShare;
     String checktype="";
+    LinearLayout llGenerteCode;
+    AddPartnerData addPartnerData;
+    EditText edEnterPartnerCode;
     public Profile_F() {
         // Required empty public constructor
     }
@@ -65,7 +79,7 @@ public class Profile_F extends RootFragment {
         viewPager.setAdapter(new CustomPagerAdapter(getActivity()));
         dots_indicator.setViewPager(viewPager);
 
-        tvUniqueCode=view.findViewById(R.id.tvUniqueCode);
+        edEnterPartnerCode=view.findViewById(R.id.edEnterPartnerCode);
         ivShare=view.findViewById(R.id.ivShare);
         ivShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +87,8 @@ public class Profile_F extends RootFragment {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 sendIntent.putExtra(Intent.EXTRA_TEXT,
-                        "Hey check out our app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID+'\n'+"Your Referal Code: "+tvUniqueCode.getText().toString().trim());
+                        "Hey check out our app at: https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID+'\n'
+                                +"Personal Code: "+ LocalStorage.getPersonalCode(getActivity()));
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }
@@ -109,6 +124,59 @@ public class Profile_F extends RootFragment {
 
 
 
+        llGenerteCode=view.findViewById(R.id.llGenerteCode);
+        llGenerteCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(edEnterPartnerCode.getText().toString().trim().length() == 0){
+                    Toast.makeText(context, "call generate code api..", Toast.LENGTH_SHORT).show();
+                    /*JSONObject parameters = new JSONObject();
+                    try {
+                        parameters.put("fb_id", NewTabHome.user_id);
+                        //parameters.put("partner_code",edEnterPartnerCode.getText().toString().trim());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Functions.Show_loader(context,false,false);
+                    ApiRequest.Call_Api(context, Variables.add_partner_info, parameters, new Callback() {
+                        @Override
+                        public void Responce(String resp) {
+                            Functions.cancel_loader();
+                            //addPartnerData = new Gson().fromJson(resp, AddPartnerData.class);
+                            //Parse_user_info(resp);
+                        }
+                    });*/
+                }else {
+                    JSONObject parameters = new JSONObject();
+                    try {
+                        parameters.put("fb_id", NewTabHome.user_id);
+                        parameters.put("partner_code",edEnterPartnerCode.getText().toString().trim());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Functions.Show_loader(context,false,false);
+                    ApiRequest.Call_Api(context, Variables.add_partner_info, parameters, new Callback() {
+                        @Override
+                        public void Responce(String resp) {
+                            try {
+                                Functions.cancel_loader();
+                                //addPartnerData = new Gson().fromJson(resp, AddPartnerData.class);
+                                try {
+                                    JSONObject response = new JSONObject(resp);
+                                    JSONArray jsonArray=response.optJSONArray("msg");
+                                    Toast.makeText(context, ""+jsonArray.optJSONObject(0).optString("response"), Toast.LENGTH_SHORT).show();
+                                    getActivity().finish();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                //Toast.makeText(context, ""+addPartnerData.getMsg().get(0).getResponse(), Toast.LENGTH_SHORT).show();
+                            }catch (Exception e){e.printStackTrace();}
+                        }
+                    });
+                }
+            }
+        });
         setting_layout=view.findViewById(R.id.setting_layout);
         setting_layout.setOnClickListener(new View.OnClickListener() {
             @Override

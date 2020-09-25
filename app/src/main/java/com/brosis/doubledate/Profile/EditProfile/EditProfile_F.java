@@ -79,8 +79,8 @@ public class EditProfile_F extends AppCompatActivity {
 
 
     EditText about_edit,job_title_edit,company_edit,school_edit,dateofbrith_edit,racial_edit;
-    RadioButton male_btn,female_btn;
-
+    RadioButton male_btn,female_btn,rbSmokeYes,rbSmokeNo,rbDrinkYes,rbDrinkNo;
+    private EditText edEnterHobbies;
 
     String image_bas64;
 
@@ -96,6 +96,8 @@ public class EditProfile_F extends AppCompatActivity {
     public EditProfile_F() {
         // Required empty public constructor
     }
+    TextView tvTitle;
+    String heading="";
     String  from_wher;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,11 +112,16 @@ public class EditProfile_F extends AppCompatActivity {
         Log.e("value","checktype "+from_wher);
         if(from_wher.equals("true")){
             setContentView(R.layout.fragment_edit_profile_addmedia);
+            heading="Update images";
         }else{
             setContentView(R.layout.fragment_edit_profile);
+            heading=getString(R.string.edit_profile);
         }
 
         context=EditProfile_F.this;
+
+        tvTitle=findViewById(R.id.tvTitle);
+        tvTitle.setText(heading);
 
         llBottomView=findViewById(R.id.llBottomView);
 
@@ -182,9 +189,14 @@ public class EditProfile_F extends AppCompatActivity {
         company_edit=findViewById(R.id.company_edit);
         school_edit=findViewById(R.id.school_edit);
         dateofbrith_edit=findViewById(R.id.dateofbirth_edit);
+        edEnterHobbies=findViewById(R.id.edEnterHobbies);
 
         male_btn=findViewById(R.id.male_btn);
         female_btn=findViewById(R.id.female_btn);
+        rbSmokeYes=findViewById(R.id.rbSmokeYes);
+        rbSmokeNo=findViewById(R.id.rbSmokeNo);
+        rbDrinkYes=findViewById(R.id.rbDrinkYes);
+        rbDrinkNo=findViewById(R.id.rbDrinkNo);
 
         back_btn=findViewById(R.id.back_btn);
         back_btn.setOnClickListener(new View.OnClickListener() {
@@ -639,11 +651,28 @@ public class EditProfile_F extends AppCompatActivity {
                 company_edit.setText(userdata.optString("company"));
                 school_edit.setText(userdata.optString("school"));
                 dateofbrith_edit.setText(userdata.optString("birthday"));
+                if(from_wher.equals("false")) {
+                    edEnterHobbies.setText(userdata.optString("hobbies"));
 
-                if(userdata.optString("gender").toLowerCase().equals("male")){
-                    male_btn.setChecked(true);
-                }else if(userdata.optString("gender").toLowerCase().equals("female")){
-                    female_btn.setChecked(true);
+                    if (userdata.optString("smoke").equals("no")) {
+                        rbSmokeNo.setChecked(true);
+                        rbSmokeYes.setChecked(false);
+                    } else {
+                        rbSmokeNo.setChecked(false);
+                        rbSmokeYes.setChecked(true);
+                    }
+                    if (userdata.optString("drink").equals("no")) {
+                        rbDrinkNo.setChecked(true);
+                        rbDrinkYes.setChecked(false);
+                    } else {
+                        rbDrinkNo.setChecked(false);
+                        rbDrinkYes.setChecked(true);
+                    }
+                    if (userdata.optString("gender").toLowerCase().equals("male")) {
+                        male_btn.setChecked(true);
+                    } else if (userdata.optString("gender").toLowerCase().equals("female")) {
+                        female_btn.setChecked(true);
+                    }
                 }
 
 
@@ -697,7 +726,17 @@ public class EditProfile_F extends AppCompatActivity {
             }else if(female_btn.isChecked()){
                 parameters.put("gender","Female");
             }
-
+            parameters.put("hobbies",edEnterHobbies.getText().toString().trim());
+            if(rbSmokeYes.isChecked()){
+                parameters.put("smoke","yes");
+            }else if(rbSmokeNo.isChecked()){
+                parameters.put("smoke","no");
+            }
+            if(rbDrinkYes.isChecked()){
+                parameters.put("drink","yes");
+            }else if(rbDrinkNo.isChecked()){
+                parameters.put("drink","no");
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

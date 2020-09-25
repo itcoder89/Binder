@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ import com.brosis.doubledate.Main_Menu.RelateToFragment_OnBack.RootFragment;
 import com.brosis.doubledate.Matchs.Match_F;
 import com.brosis.doubledate.R;
 import com.brosis.doubledate.CodeClasses.Variables;
+import com.brosis.doubledate.model.GetNearByUserData;
 import com.brosis.doubledate.newtab.NewTabHome;
 import com.brosis.doubledate.storage.LocalStorage;
 import com.google.android.gms.ads.AdListener;
@@ -50,6 +52,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.SwipeDirection;
@@ -92,7 +95,7 @@ public class Users_F extends RootFragment implements View.OnClickListener {
     DatabaseReference rootref;
     boolean is_Api_running=false;
     boolean is_view_load=false;
-
+    public static GetNearByUserData getNearByUserData;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -194,9 +197,10 @@ public class Users_F extends RootFragment implements View.OnClickListener {
                     // find if the swipes card is last or not
                     if (card_viewstack.getTopIndex() == adapter.getCount()) {
                         // if last then we will replace the view and show the ad
-                        if(mInterstitialAd.isLoaded()){
+                        //before show ads when last swipe comment
+                        /*if(mInterstitialAd.isLoaded()){
                             mInterstitialAd.show();
-                        }
+                        }*/
 
                         ShowfindingView();
                     }
@@ -806,8 +810,8 @@ public class Users_F extends RootFragment implements View.OnClickListener {
         ApiRequest.Call_Api(context, Variables.userNearByMe, parameters, new Callback() {
             @Override
             public void Responce(String resp) {
-
                 Functions.cancel_loader();
+                getNearByUserData = new Gson().fromJson(resp, GetNearByUserData.class);
                 is_Api_running=false;
                 Parse_user_info(resp);
             }
@@ -839,6 +843,7 @@ public class Users_F extends RootFragment implements View.OnClickListener {
 
                     for (int i = 0; i < msg.length(); i++) {
                         JSONObject userdata = msg.getJSONObject(i);
+
                         parse_User_Data(userdata);
                     }
 
@@ -849,6 +854,9 @@ public class Users_F extends RootFragment implements View.OnClickListener {
                     SharedPreferences.Editor editor=NewTabHome.sharedPreferences.edit();
                     editor.putInt(Variables.user_like_limit,Integer.parseInt(my_data_onject.optString("like_limit","0")));
                     editor.putInt(Variables.user_superlike_limit,Integer.parseInt(my_data_onject.optString("super_like_limit","0")));
+
+                    LocalStorage.setPersonalCode(getActivity(),my_data_onject.optString("personal_code"));
+                    Log.e("LocalStorage",LocalStorage.getPersonalCode(getActivity()));
 
                     if(my_data_onject.optString("hide_location","0").equals("1")){
                         editor.putBoolean(Variables.hide_Distance,true);
@@ -895,7 +903,7 @@ public class Users_F extends RootFragment implements View.OnClickListener {
     }
 
 
-    public void parse_User_Data(JSONObject userdata){
+    public void parse_User_Data(JSONObject userdata) throws JSONException {
         Nearby_User_Get_Set item=new Nearby_User_Get_Set();
         item.setFb_id(userdata.optString("fb_id"));
         item.setFirst_name(userdata.optString("first_name"));
@@ -909,31 +917,31 @@ public class Users_F extends RootFragment implements View.OnClickListener {
         item.setLocation(userdata.optString("distance"));
         item.setGender(""+userdata.optString("gender"));
         item.setSwipe(""+userdata.optString("swipe"));
-
         item.setSuper_like(""+userdata.optString("super_like"));
 
-        block=userdata.optString("block");
-
         ArrayList<String> images=new ArrayList<>();
-
         images.add(userdata.optString("image1"));
-
         if(!userdata.optString("image2").equals(""))
             images.add(userdata.optString("image2"));
-
         if(!userdata.optString("image3").equals(""))
             images.add(userdata.optString("image3"));
-
         if(!userdata.optString("image4").equals(""))
             images.add(userdata.optString("image4"));
-
         if(!userdata.optString("image5").equals(""))
             images.add(userdata.optString("image5"));
-
         if(!userdata.optString("image6").equals(""))
             images.add(userdata.optString("image6"));
-
         item.setImagesurl(images);
+
+        item.setHide_age(""+userdata.optString("hide_age"));
+        item.setHide_location(""+userdata.optString("hide_location"));
+        item.setSmoke(""+userdata.optString("smoke"));
+        item.setDrink(""+userdata.optString("drink"));
+        item.setHobbies(""+userdata.optString("hobbies"));
+        item.setPartner_code(""+userdata.optString("partner_code"));
+        item.setPersonal_code(""+userdata.optString("personal_code"));
+
+        block=userdata.optString("block");
 
 
         adapter.add(item);
@@ -944,11 +952,29 @@ public class Users_F extends RootFragment implements View.OnClickListener {
     public void open_user_detail(){
 
         //before
-       Nearby_User_Get_Set item= adapter.getItem(card_viewstack.getTopIndex());
+        Nearby_User_Get_Set item = adapter.getItem(card_viewstack.getTopIndex());
+        Log.e("getTopIndex", "pos "+card_viewstack.getTopIndex());
         User_detail_F user_detail_f = new User_detail_F();
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         Bundle args = new Bundle();
         args.putSerializable("data",item);
+        args.putString("first_name",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getFirst_name());
+        args.putString("last_name",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getLast_name());
+        args.putString("about_me",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getAbout_me());
+        args.putString("job_title",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getJob_title());
+        args.putString("gender",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getGender());
+        args.putString("birthday",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getBirthday());
+        args.putString("company",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getCompany());
+        args.putString("school",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getSchool());
+        args.putString("age",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getAge()+"");
+        args.putString("partner_code",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getPartner_code());
+        args.putString("personal_code",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getPersonal_code());
+        args.putString("image1",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getImage1());
+        args.putString("image2",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getImage2());
+        args.putString("image3",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getImage3());
+        args.putString("image4",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getImage4());
+        args.putString("image5",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getImage5());
+        args.putString("image6",getNearByUserData.getMsg().get(card_viewstack.getTopIndex()).getPartner_details().getImage6());
         user_detail_f.setArguments(args);
         transaction.addToBackStack(null);
         transaction.replace(R.id.MainMenuFragment, user_detail_f,"User_detail_F").commit();
@@ -959,9 +985,6 @@ public class Users_F extends RootFragment implements View.OnClickListener {
         startActivity(intent);*/
 
     }
-    // this mehtod will show the view which will show the more detail about the user
-
-
     // when user will click the refresh btn  then this view will be open for subscribe it in our app
     public void open_subscription_view(){
         /*InApp_Subscription_A inApp_subscription_a = new InApp_Subscription_A();

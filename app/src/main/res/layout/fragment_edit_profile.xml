@@ -41,6 +41,7 @@
                     android:layout_marginStart="5dp" />
 
                 <TextView
+                    android:id="@+id/tvTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/edit_profile"
@@ -335,9 +336,11 @@
 
 
                     <EditText
+                        android:id="@+id/edEnterHobbies"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/gray"
+                        android:textColor="@color/black"
                         android:paddingLeft="10dp"
                         android:inputType="textMultiLine"
                         android:maxLines="5"

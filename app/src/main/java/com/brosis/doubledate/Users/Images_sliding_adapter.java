@@ -11,6 +11,9 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.brosis.doubledate.CodeClasses.Variables;
 import com.brosis.doubledate.R;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -59,6 +62,13 @@ public class Images_sliding_adapter extends PagerAdapter {
             if(arrayList.get(position).equals("")){
 
             }else {
+
+               /* Glide.with(context)
+                        .load(Variables.image_base_url+arrayList.get(position))
+                        .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE)
+                                .placeholder(context.getResources().getDrawable(R.drawable.image_placeholder)).centerCrop())
+                        .skipMemoryCache(true)
+                        .into(imageView);*/
 
                 Uri uri;
                 if(arrayList.get(position).contains("http"))

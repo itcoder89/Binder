@@ -110,6 +110,10 @@ public class Variables {
 
     public static String Edit_profile=domain+"edit_profile";
 
+    public static String add_partner_info=domain+"add_partner_info";
+
+    public static String remove_partner_info=domain+"remove_partner_info";
+
     public static String getUserInfo=domain+"getUserInfo";
 
     public static String uploadImages=domain+"uploadImages";
