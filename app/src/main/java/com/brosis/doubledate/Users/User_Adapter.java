@@ -45,11 +45,11 @@ public class User_Adapter  extends ArrayAdapter<Nearby_User_Get_Set> {
 
 
         String[] splited = spot.getLocation().split("\\s+");
-        //holder.distance_txt.setText(spot.getLocation());
-        float kilomtr = convertMilesToKilom(Float.parseFloat(splited[0]));
+        holder.distance_txt.setText(spot.getLocation());
+        //float kilomtr = convertMilesToKilom(Float.parseFloat(splited[0]));
         //holder.distance_txt.setText(splited[0]+" Km. away");
-        String s = String.format("%.2f", kilomtr);
-        holder.distance_txt.setText(s+" Km. away");
+        //String s = String.format("%.2f", kilomtr);
+        //holder.distance_txt.setText(s+" Km. away");
         holder.name.setText(spot.getFirst_name());
 
         if(spot.getImagesurl().get(0).equals("")){

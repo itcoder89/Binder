@@ -223,6 +223,7 @@
  <string name="stand_our_with_super_like">Stand our with super like</string>
     <string name="i_meant_to_swipte_right">I meant to swipte right</string>
     <string name="tab_text">Home</string>
+    <string name="crash_toast_text">please sent report to administrator</string>
 
 
 </resources>

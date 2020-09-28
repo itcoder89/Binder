@@ -19,6 +19,7 @@ import com.brosis.doubledate.CodeClasses.VersionChecker;
 import com.brosis.doubledate.Inbox.Inbox_F;
 import com.brosis.doubledate.Profile.Profile_F;
 import com.brosis.doubledate.R;
+import com.brosis.doubledate.Splash_A;
 import com.brosis.doubledate.Users.Users_F;
 import com.brosis.doubledate.UsersLikes.User_likes_F;
 import com.brosis.doubledate.storage.LocalStorage;
@@ -73,12 +74,13 @@ public class NewTabHome extends AppCompatActivity implements BillingProcessor.IB
             R.drawable.ic_msg_inactive
     };
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_tab_layout);
-
-        // here we will make the static variable of user info which will user in different
+        //if (LocalStorage.getLaunchActivity(NewTabHome.this).equals("true")) {
+          //  LocalStorage.setLaunchActivity(NewTabHome.this, "false");
+            setContentView(R.layout.new_tab_layout);
         // places during using app
         sharedPreferences = getSharedPreferences(Variables.pref_name, MODE_PRIVATE);
         user_id = sharedPreferences.getString(Variables.uid, "null");
@@ -125,6 +127,7 @@ public class NewTabHome extends AppCompatActivity implements BillingProcessor.IB
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+    //}
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -280,7 +283,7 @@ public class NewTabHome extends AppCompatActivity implements BillingProcessor.IB
             e.printStackTrace();
         }
         //before
-        //ApiRequest.Call_Api(this, Variables.update_purchase_Status, parameters, null);
+        ApiRequest.Call_Api(this, Variables.update_purchase_Status, parameters, null);
 
 
     }

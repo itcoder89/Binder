@@ -258,8 +258,8 @@ public class InApp_Subscription_A extends AppCompatActivity implements BillingPr
 
 
     public void Goback() {
-
-        startActivity(new Intent(InApp_Subscription_A.this, Splash_A.class));
+        //before
+        //startActivity(new Intent(InApp_Subscription_A.this, Splash_A.class));
         InApp_Subscription_A.this.finish();
 
     }

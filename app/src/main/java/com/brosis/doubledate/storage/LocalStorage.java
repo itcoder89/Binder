@@ -27,4 +27,27 @@ public class LocalStorage {
         android.content.SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         return mPrefs.getString("setPersonalCode", "");
     }
+    public static void setPartnerCode(Context context, String key) {
+        android.content.SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        android.content.SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        prefsEditor.putString("setPartnerCode", key);
+        prefsEditor.commit();
+    }
+
+    public static String getPartnerCode(Context context) {
+        android.content.SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return mPrefs.getString("setPartnerCode", "");
+    }
+
+    public static void setLaunchActivity(Context context, String key) {
+        android.content.SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        android.content.SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        prefsEditor.putString("setLaunchActivity", key);
+        prefsEditor.commit();
+    }
+
+    public static String getLaunchActivity(Context context) {
+        android.content.SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return mPrefs.getString("setLaunchActivity", "false");
+    }
 }

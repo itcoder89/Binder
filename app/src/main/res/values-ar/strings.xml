@@ -193,4 +193,5 @@
     <string name="some_people">Some people likes you</string>
     <string name="i_meant_to_swipte_right">I meant to swipte right</string>
     <string name="tab_text">Home</string>
+    <string name="crash_toast_text">please sent report to administrator</string>
 </resources>

@@ -22,6 +22,7 @@ import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brosis.doubledate.newtab.NewTabHome;
+import com.brosis.doubledate.storage.LocalStorage;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
@@ -79,6 +81,7 @@ public class User_detail_F extends Fragment implements View.OnClickListener {
     String from_where;
     //partner ids
     CircleImageView user_image;
+    LinearLayout partner_bottom_layout;
     private TextView partner_bottom_school_txt,tvPartnerName,tvPartnerAge,partner_bottom_job_txt,partner_school_layout,partner_bottom_location_txt,partner_bottom_gender,partner_bottom_about_txt;
     public User_detail_F() {
 
@@ -159,6 +162,7 @@ public class User_detail_F extends Fragment implements View.OnClickListener {
             //Log.e("last_name",": "+last_name);
         }
 
+        partner_bottom_layout = view.findViewById(R.id.partner_bottom_layout);
         scrollView = view.findViewById(R.id.scrollView);
         username_layout = view.findViewById(R.id.username_layout);
         Set_Slider();
@@ -197,6 +201,11 @@ public class User_detail_F extends Fragment implements View.OnClickListener {
     public void init_bottom_view() {
 
         ivRemovePartner=view.findViewById(R.id.ivRemovePartner);
+        if(LocalStorage.getPartnerCode(getActivity()).equals(partner_code)){
+            ivRemovePartner.setVisibility(View.VISIBLE);
+        }else{
+            ivRemovePartner.setVisibility(View.GONE);
+        }
         ivRemovePartner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -238,13 +247,24 @@ public class User_detail_F extends Fragment implements View.OnClickListener {
         //partner ids
         user_image = view.findViewById(R.id.user_image);
         partner_bottom_school_txt = view.findViewById(R.id.partner_bottom_school_txt);
-        if(company.equals("")){
-            partner_bottom_school_txt.setText(company);
-        }else if(school.equals("")){
-            partner_bottom_school_txt.setText(school);
+        if(first_name == null){
+            partner_bottom_layout.setVisibility(View.GONE);
         }else{
-            partner_bottom_school_txt.setText(getString(R.string.school_college));
+            partner_bottom_layout.setVisibility(View.VISIBLE);
         }
+        if(company != null) {
+
+            if (company.equals("")) {
+                partner_bottom_school_txt.setText(company);
+            } else if (school.equals("")) {
+                partner_bottom_school_txt.setText(school);
+            } else {
+                partner_bottom_school_txt.setText(getString(R.string.school_college));
+            }
+        }
+
+
+        //
 
         tvPartnerName = view.findViewById(R.id.tvPartnerName);
         tvPartnerName.setText(first_name+" "+last_name);
@@ -308,13 +328,11 @@ public class User_detail_F extends Fragment implements View.OnClickListener {
 
         bottom_location_text=view.findViewById(R.id.bottom_location_txt);
 
-        String[] splited = data_item.getLocation().split("\\s+");
-        //holder.distance_txt.setText(spot.getLocation());
-        float kilomtr = convertMilesToKilom(Float.parseFloat(splited[0]));
-        //holder.distance_txt.setText(splited[0]+" Km. away");
-        String s = String.format("%.2f", kilomtr);
-       // bottom_location_text.setText(data_item.getLocation());
-        bottom_location_text.setText(s+" Km. away");
+       // String[] splited = data_item.getLocation().split("\\s+");
+       // float kilomtr = convertMilesToKilom(Float.parseFloat(splited[0]));
+       // String s = String.format("%.2f", kilomtr);
+        bottom_location_text.setText(data_item.getLocation());
+       // bottom_location_text.setText(s+" Km. away");
 
         bottom_about_txt=view.findViewById(R.id.bottom_about_txt);
         if(data_item.getAbout().equals("")){

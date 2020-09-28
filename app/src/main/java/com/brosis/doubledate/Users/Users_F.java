@@ -856,6 +856,7 @@ public class Users_F extends RootFragment implements View.OnClickListener {
                     editor.putInt(Variables.user_superlike_limit,Integer.parseInt(my_data_onject.optString("super_like_limit","0")));
 
                     LocalStorage.setPersonalCode(getActivity(),my_data_onject.optString("personal_code"));
+                    LocalStorage.setPartnerCode(getActivity(),my_data_onject.optString("partner_code"));
                     Log.e("LocalStorage",LocalStorage.getPersonalCode(getActivity()));
 
                     if(my_data_onject.optString("hide_location","0").equals("1")){
